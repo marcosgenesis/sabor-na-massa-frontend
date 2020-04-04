@@ -8,7 +8,7 @@ export const Container = styled.div`
       width: 460px;
       height: 61px;
       border-radius: 10px;
-      background: #fff;
+      background-color: #fff;
       border: 1px solid #eaeaea;
       padding: 10px;
     }
@@ -17,13 +17,14 @@ export const Container = styled.div`
     margin-top: 30px;
     margin-left: 160px;
     display: flex;
-    justify-content: space-between;
+    align-items: center;
     a {
+      margin-left: 30px;
       width: 147px;
       height: 48px;
       border-radius: 7px;
       text-align: center;
-      line-height: 42px;
+      line-height: 45px;
       background: #fbcacc;
       font-weight: bold;
       color: #ff3131;
@@ -33,44 +34,27 @@ export const Container = styled.div`
 `;
 
 export const Orders = styled.div`
+  margin-top: 30px;
   margin-left: 160px;
   display: flex;
-  justify-content: space-between;
-  h3 {
-    color: #999999;
-    &::before {
-      content: '';
-      width: 20px;
-      height: 20px;
-      border-radius: 50%;
-      background: #000;
-    }
-  }
 `;
-export const Order = styled.div`
-  width: 407px;
-  height: 79px;
-  background: #fff;
-  margin-top: 20px;
-  box-shadow: 8px 3px 20px rgba(0, 0, 0, 0.07);
+export const Board = styled.ul`
+  width: 400px;
   display: flex;
-  align-items: center;
-  padding: 15px;
-  ul {
-    width: 100%;
-    li {
-      width: 100%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      button {
-        background: transparent;
-        border: none;
-        svg {
-          color: #999999;
-        }
-      }
+  flex-direction: column;
+  .boardTitle {
+    height: 25px;
+    display: flex;
+    align-items: center;
+    span {
+      margin-right: 10px;
+      width: 10px;
+      height: 10px;
+      background: ${(props) => props.badgeColor};
+      border-radius: 50%;
     }
   }
+  & + ul {
+    margin-left: 40px;
+  }
 `;
-export const Item = styled.div``;

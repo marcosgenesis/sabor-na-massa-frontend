@@ -1,24 +1,18 @@
 import React from 'react';
-import { toast } from 'react-toastify';
-import { useHistory } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import { Form } from '@unform/web';
+import { signInRequest } from '~/store/modules/auth/actions';
 import { Container } from './styles';
+
 import Input from '../../components/Input';
 import logo from '../../assets/SVG/logo.svg';
 import api from '../../services/api';
 
 export default function Signin() {
-  const history = useHistory();
-
+  const dispatch = useDispatch();
+  const loading = useSelector((state) => state.auth.loading);
   async function handleSubmit({ username, password }) {
-    try {
-      const response = await api.post('/sessions', { username, password });
-      localStorage.setItem('token', response.data.token);
-
-      history.push('/dashboard');
-    } catch (error) {
-      toast.error('Deu ruim! tente novamente');
-    }
+    dispatch(signInRequest(username, password));
   }
   return (
     <Container>
@@ -26,7 +20,7 @@ export default function Signin() {
         <img src={logo} alt="" />
         <Input name="username" placeholder="Username" />
         <Input name="password" placeholder="Password" type="password" />
-        <button type="submit">Entrar</button>
+        <button type="submit">{loading ? 'Carregando' : 'Entrar'}</button>
       </Form>
     </Container>
   );

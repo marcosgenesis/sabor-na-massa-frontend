@@ -1,90 +1,40 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  height: 100%;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  .actions {
-    width: 40vw;
-    height: 50px;
+  header {
+    margin-left: 160px;
+    input {
+      margin-top: 30px;
+      width: 460px;
+      height: 61px;
+      border-radius: 10px;
+      background-color: #fff;
+      border: 1px solid #eaeaea;
+      padding: 10px;
+    }
+  }
+  .dashboardActions {
+    margin-top: 30px;
+    margin-left: 160px;
     display: flex;
-    justify-content: space-between;
-    margin-bottom: 30px;
+    align-items: center;
     a {
-      width: 30%;
-      border-radius: 5px;
+      margin-left: 30px;
+      width: 147px;
+      height: 48px;
+      border-radius: 7px;
       text-align: center;
-      line-height: 50px;
-      color: white;
+      line-height: 45px;
+      background: #fbcacc;
       font-weight: bold;
-      background: linear-gradient(
-        to right,
-        rgba(226, 57, 105, 1) 0%,
-        rgba(253, 172, 73, 1) 100%
-      );
-      &:hover {
-        opacity: 0.7;
-      }
+      color: #ff3131;
+      font-size: 16px;
     }
   }
   form {
+    margin-left: 160px;
+    width: 50%;
     padding: 30px;
-    width: 40vw;
-    background: #f0f0f5;
-    box-shadow: 0 0 100px rgba(0, 0, 0, 0.1);
-    h2 {
-      text-align: center;
-      margin-bottom: 30px;
-      color: #333;
-    }
-    button {
-      width: 100%;
-      height: 44px;
-      border: none;
-      border-radius: 5px;
-      background: rgba(226, 57, 105, 1);
-      font-size: 18px;
-      font-weight: bold;
-      color: #fff;
-    }
-    .react-select__control {
-      margin-bottom: 20px;
-    }
-    .itens {
-      margin-top: 25px;
-      .itensHeader {
-        margin: 25px 0px;
-        display: flex;
-        justify-content: space-between;
-        .btnNewItem {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          border: none;
-          border-radius: 5px;
-          width: 100px;
-          height: 30px;
-          font-weight: normal;
-          font-size: 16px;
-          background: transparent;
-          color: rgba(226, 57, 105, 1);
-          font-weight: bold;
-          &:hover {
-            opacity: 0.7;
-          }
-        }
-      }
-      .item {
-        .sabor {
-          margin-left: 10px;
-          width: 100%;
-        }
-        display: flex;
-        justify-content: space-between;
-      }
-    }
+    background: #fff;
   }
 `;

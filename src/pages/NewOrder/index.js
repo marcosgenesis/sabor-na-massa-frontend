@@ -7,6 +7,7 @@ import Input from '../../components/Input';
 import Search from '../../components/Search';
 import api from '../../services/api';
 import { Container } from './styles';
+import SideBar from '../../components/SideBar';
 
 export default function NewOrder() {
   const token = localStorage.getItem('token');
@@ -141,13 +142,15 @@ export default function NewOrder() {
   }
   return (
     <Container>
-      <div className="actions">
-        <Link to="/newClient">Novo Cliente</Link>
-        <Link to="/updateClient">Editar Cliente</Link>
-        <Link to="/newFlavor">Novo sabor</Link>
+      <SideBar />
+      <header>
+        <input name="search" placeholder="Pesquisar" />
+      </header>
+      <div className="dashboardActions">
+        <h1>Novo Pedido</h1>
+        <Link to="/newOrder">Novo Cliente</Link>
       </div>
       <Form onSubmit={handleNewOrder}>
-        <h2>Novo pedido</h2>
         <Search
           placeholder="Cliente"
           name="client"
