@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux';
 import { Container, Item } from './styles';
 
 export default function Detail() {
-  const [subtotal, setSubtotal] = useState(0);
   const { post } = useSelector((state) => state.post);
   return (
     <Container>

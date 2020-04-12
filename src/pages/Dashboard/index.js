@@ -21,7 +21,7 @@ export default function Dashboard() {
       setOrders(response.data.data);
     }
     loadPosts();
-  }, []);
+  }, [orders]);
   return (
     <Container>
       <Detail />
@@ -40,7 +40,7 @@ export default function Dashboard() {
             <h2>Para fazer</h2>
           </div>
           {orders.map((order) =>
-            order.status === 'Não Feita' ? (
+            order.status === 'Não feita' ? (
               <Order key={order.id} data={order} />
             ) : null
           )}
