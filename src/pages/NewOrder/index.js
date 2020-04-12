@@ -6,11 +6,12 @@ import { FiPlusCircle } from 'react-icons/fi';
 import Input from '../../components/Input';
 import Search from '../../components/Search';
 import api from '../../services/api';
-import { Container } from './styles';
+import { Container, SendButton } from './styles';
 import SideBar from '../../components/SideBar';
 
+import { store } from '~/store';
+
 export default function NewOrder() {
-  const token = localStorage.getItem('token');
   const history = useHistory();
   const [clients, setClients] = useState([]);
 
@@ -20,7 +21,7 @@ export default function NewOrder() {
   const [InputsItems, setInputsItems] = useState([]);
   const [totalInputItems, setTotalInputItems] = useState(1);
 
-  const [flavorsOptions, setFlavorsOptions] = useState([
+  const [flavorsOptions] = useState([
     {
       label: 'Pizzas',
       options: [
@@ -81,11 +82,12 @@ export default function NewOrder() {
     },
   ]);
 
+  const { token } = store.getState().auth;
   useEffect(() => {
     async function loadClients() {
       const response = await api.get('clients', {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${token.token}`,
         },
       });
       const data = response.data.data.map((client) => ({
@@ -96,7 +98,8 @@ export default function NewOrder() {
     }
 
     loadClients();
-  }, []);
+  }, [token]);
+
   function loadClientAddress(client) {
     const data = client.addresses.map((address) => ({
       value: address,
@@ -124,7 +127,6 @@ export default function NewOrder() {
         },
       }
     );
-    console.log(response.data.id);
     const { id: order_id } = response.data;
     items.map(async ({ qtd, flavor }) => {
       const { title, tag, price } = flavor;
@@ -194,7 +196,9 @@ export default function NewOrder() {
             </div>
           ))}
         </div>
-        <button onSubmit={handleNewOrder}>Enviar</button>
+        <SendButton type="button" onSubmit={handleNewOrder}>
+          Criar Pedido
+        </SendButton>
       </Form>
     </Container>
   );

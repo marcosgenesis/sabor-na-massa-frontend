@@ -17,6 +17,15 @@ export const OrderContainer = styled.ul`
       background: transparent;
       border: none;
       color: #999;
+      display: block;
+      width: 30px;
+      height: 30px;
+      &:hover {
+        color: #333;
+      }
+    }
+    .btnSeeMore {
+      width: 90px;
     }
     a {
       color: #999;
@@ -28,10 +37,4 @@ export const OrderContainer = styled.ul`
   h2 {
     color: #999;
   }
-`;
-export const Item = styled.li`
-  display: flex;
-  justify-content: space-between;
-  font-size: 17px;
-  color: #999999;
 `;

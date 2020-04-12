@@ -1,3 +1,3 @@
-import { all, takeLatest, put, call } from 'redux-saga/effects';
+import { all } from 'redux-saga/effects';
 
 export default all([]);

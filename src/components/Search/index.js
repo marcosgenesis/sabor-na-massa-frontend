@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from 'react';
-import ReactSelect from 'react-select';
 import { useField } from '@unform/core';
+import { ReactSelectField } from './styles';
 
 const Select = ({ name, ...rest }) => {
   const selectRef = useRef(null);
@@ -25,7 +25,7 @@ const Select = ({ name, ...rest }) => {
     });
   }, [fieldName, registerField, rest.isMulti]);
   return (
-    <ReactSelect
+    <ReactSelectField
       defaultValue={defaultValue}
       ref={selectRef}
       classNamePrefix="react-select"

@@ -7,7 +7,7 @@ export default function SideBar() {
   return (
     <Container>
       <img src={logo} alt="" />
-      <MenuItem selected={(props) => props.selected === 'dashboard'}>
+      <MenuItem selected>
         <FiClipboard size={35} />
       </MenuItem>
       <MenuItem>

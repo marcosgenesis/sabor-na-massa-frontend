@@ -36,5 +36,44 @@ export const Container = styled.div`
     width: 50%;
     padding: 30px;
     background: #fff;
+    display: flex;
+    flex-direction: column;
   }
+  .itens {
+    .itensHeader {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 10px;
+      button {
+        width: 85px;
+        background: transparent;
+        border: none;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+    }
+    .item {
+      display: flex;
+      justify-content: space-between;
+      input {
+        width: 12%;
+      }
+      .sabor {
+        width: 85%;
+      }
+    }
+  }
+`;
+export const SendButton = styled.button`
+  width: 50%;
+  height: 42px;
+  border: none;
+  border-radius: 5px;
+  background: #fbcacc;
+  color: #ff3131;
+  font-weight: bold;
+  font-size: 18px;
+  margin-top: 30px;
+  align-self: center;
 `;

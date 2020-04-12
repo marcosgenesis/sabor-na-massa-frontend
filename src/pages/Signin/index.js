@@ -6,7 +6,6 @@ import { Container } from './styles';
 
 import Input from '../../components/Input';
 import logo from '../../assets/SVG/logo.svg';
-import api from '../../services/api';
 
 export default function Signin() {
   const dispatch = useDispatch();

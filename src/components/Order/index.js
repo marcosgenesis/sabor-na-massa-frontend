@@ -1,20 +1,34 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { FiTrash2 } from 'react-icons/fi';
-import { OrderContainer, Item } from './styles';
+import { OrderContainer } from './styles';
 
-export default function Order(props) {
-  let orderSubtotal = 0;
-  const [visible, setVisible] = useState(false);
-  function handleToggleVisible() {
-    setVisible(!visible);
+import { postDetail } from '~/store/modules/post/actions';
+
+export default function Order({ data: order }) {
+  const [subtotal, setSubtotal] = useState(0);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    order.items.map((item) => {
+      return setSubtotal(subtotal + item.price * item.qtd);
+    });
+  }, []);
+
+  function handleToggleDetail(post) {
+    dispatch(postDetail(post));
   }
+
   return (
-    <OrderContainer visible={visible}>
+    <OrderContainer>
       <li>
         <div className="clientName">
-          <h3>{props.clientName}</h3>
-          <button type="button" onClick={handleToggleVisible}>
+          <h3>{order.client.name}</h3>
+          <button
+            type="button"
+            className="btnSeeMore"
+            onClick={() => handleToggleDetail(order)}
+          >
             ver mais
           </button>
           <button type="button">
@@ -22,35 +36,6 @@ export default function Order(props) {
           </button>
         </div>
       </li>
-      {visible ? (
-        <>
-          <li>
-            {props.items.map((item) => {
-              orderSubtotal += item.qtd * item.price;
-              return (
-                <Item key={item.id}>
-                  <p>{item.qtd}</p>
-                  <p>{item.title}</p>
-                  <p>
-                    {Intl.NumberFormat('pt-BR', {
-                      style: 'currency',
-                      currency: 'BRL',
-                    }).format(item.price)}
-                  </p>
-                </Item>
-              );
-            })}
-          </li>
-          <li>
-            <h2>
-              {Intl.NumberFormat('pt-BR', {
-                style: 'currency',
-                currency: 'BRL',
-              }).format(orderSubtotal)}
-            </h2>
-          </li>
-        </>
-      ) : null}
     </OrderContainer>
   );
 }

@@ -6,14 +6,16 @@ import SideBar from '../../components/SideBar';
 import Order from '../../components/Order';
 import Detail from '../../components/Detail';
 
+import { store } from '~/store';
+
 export default function Dashboard() {
   const [orders, setOrders] = useState([]);
   useEffect(() => {
-    const token = localStorage.getItem('token');
+    const { token } = store.getState().auth;
     async function loadPosts() {
       const response = await api.get('orders', {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${token.token}`,
         },
       });
       setOrders(response.data.data);
@@ -22,6 +24,7 @@ export default function Dashboard() {
   }, []);
   return (
     <Container>
+      <Detail />
       <SideBar selected="dashboard" />
       <header>
         <input name="search" placeholder="Pesquisar" />
@@ -38,7 +41,7 @@ export default function Dashboard() {
           </div>
           {orders.map((order) =>
             order.status === 'Não Feita' ? (
-              <Order clientName={order.client.name} items={order.items} />
+              <Order key={order.id} data={order} />
             ) : null
           )}
         </Board>
@@ -49,7 +52,7 @@ export default function Dashboard() {
           </div>
           {orders.map((order) =>
             order.status === 'Fazendo' ? (
-              <Order clientName={order.client.name} items={order.items} />
+              <Order key={order.id} data={order} />
             ) : null
           )}
         </Board>
@@ -60,7 +63,7 @@ export default function Dashboard() {
           </div>
           {orders.map((order) =>
             order.status === 'Feito' ? (
-              <Order clientName={order.client.name} items={order.items} />
+              <Order key={order.id} data={order} />
             ) : null
           )}
         </Board>

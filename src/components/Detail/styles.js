@@ -33,9 +33,12 @@ export const Container = styled.div`
       p {
         font-size: 18px;
       }
-      .addressFields {
-        display: flex;
-        justify-content: space-between;
+    }
+
+    .addressFields {
+      display: flex;
+      div {
+        margin-right: 40px;
       }
     }
   }
