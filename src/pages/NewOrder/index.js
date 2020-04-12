@@ -1,18 +1,20 @@
 import React, { useEffect, useState } from 'react';
-import { useHistory, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Form } from '@unform/web';
 import { Scope } from '@unform/core';
 import { FiPlusCircle } from 'react-icons/fi';
+
 import Input from '../../components/Input';
 import Search from '../../components/Search';
-import api from '../../services/api';
-import { Container, SendButton } from './styles';
 import SideBar from '../../components/SideBar';
+import api from '../../services/api';
+import history from '../../services/history';
+
+import { Container, SendButton } from './styles';
 
 import { store } from '~/store';
 
 export default function NewOrder() {
-  const history = useHistory();
   const [clients, setClients] = useState([]);
 
   const [clientAddress, setClientAddress] = useState({});
@@ -108,13 +110,16 @@ export default function NewOrder() {
     setaddressVisible(false);
     return data;
   }
-  async function handleNewOrder({ items, client, address, obs }) {
+
+  async function handleNewOrder({ client, address, items, obs }) {
+    console.tron.log({ client, address, items, obs });
+
     const { id: client_id } = client;
     const { id: client_address_id } = address;
+    console.tron.log(address);
     let subtotal = 0;
-
     items.map((item) => {
-      subtotal += item.flavor.price * item.qtd;
+      subtotal += item.qtd * item.flavor.price;
       return subtotal;
     });
 
@@ -123,11 +128,12 @@ export default function NewOrder() {
       { client_id, client_address_id, obs, subtotal },
       {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${token.token}`,
         },
       }
     );
     const { id: order_id } = response.data;
+
     items.map(async ({ qtd, flavor }) => {
       const { title, tag, price } = flavor;
       await api.post(
@@ -135,10 +141,11 @@ export default function NewOrder() {
         { qtd, title, tag, price },
         {
           headers: {
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${token.token}`,
           },
         }
       );
+      console.tron.log(response.data);
     });
     history.push('/dashboard');
   }
@@ -184,7 +191,7 @@ export default function NewOrder() {
           </div>
           {InputsItems.map((index) => (
             <div className="item" key={index}>
-              <Scope path={`items[${index}]`}>
+              <Scope path={`items[${index - 1}]`}>
                 <Input name="qtd" placeholder="QTD" />
                 <Search
                   placeholder="Escolha o sabor"
@@ -196,7 +203,7 @@ export default function NewOrder() {
             </div>
           ))}
         </div>
-        <SendButton type="button" onSubmit={handleNewOrder}>
+        <SendButton type="submit" onSubmit={handleNewOrder}>
           Criar Pedido
         </SendButton>
       </Form>
