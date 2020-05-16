@@ -10,7 +10,6 @@ export function* signIn({ payload }) {
 
     const response = yield call(api.post, 'sessions', { username, password });
     const { token, user } = response.data;
-
     if (!user.admin) console.tron.error('Usuario não é administrador');
     yield put(signInSuccess(token, user));
     history.push('/dashboard');

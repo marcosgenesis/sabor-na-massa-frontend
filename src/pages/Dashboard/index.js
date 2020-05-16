@@ -12,16 +12,16 @@ export default function Dashboard() {
   const [orders, setOrders] = useState([]);
   useEffect(() => {
     const { token } = store.getState().auth;
-    async function loadPosts() {
-      const response = await api.get('orders', {
+    api
+      .get('orders', {
         headers: {
           Authorization: `Bearer ${token.token}`,
         },
+      })
+      .then((response) => {
+        setOrders(response.data.data);
       });
-      setOrders(response.data.data);
-    }
-    loadPosts();
-  }, [orders]);
+  }, []);
   return (
     <Container>
       <Detail />
