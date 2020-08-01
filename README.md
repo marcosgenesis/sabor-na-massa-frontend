@@ -8,12 +8,6 @@ A ideia de fazer esse software surgiu quando minha irmã montou uma pizzaria, e 
 
 ![](https://user-images.githubusercontent.com/49327985/88493842-ad1c3e80-cf89-11ea-9abd-a4f4c83efa90.png)
 
-## Usage example
-
-A few motivating and useful examples of how your product can be used. Spice this up with code blocks and potentially more screenshots.
-
-_For more examples and usage, please refer to the [Wiki][wiki]._
-
 ## Development setup
 
 Para rodar o projeto em sua máquina é bem simples, basta seguir os passos a seguir:
